@@ -1,6 +1,5 @@
-import random
+from secrets import choice
 
 
 def randint(a, b):
-    random.seed()
-    return random.randint(a, b)
+    return choice(range(a, b+1))

@@ -10,24 +10,24 @@ class TestDice(unittest.TestCase):
 
     def testGreaterThanZero(self):
         with self.assertRaises(ValueError):
-            Dice(-1,6)
+            Dice(-1, 6)
         with self.assertRaises(ValueError):
-            Dice(1,-6)
+            Dice(1, -6)
         with self.assertRaises(ValueError):
-            Dice(0,6)
+            Dice(0, 6)
         with self.assertRaises(ValueError):
-            Dice(1,0)
+            Dice(1, 0)
 
     def testIntArguments(self):
         with self.assertRaises(AssertionError):
-            Dice("cats",0)
+            Dice("cats", 0)
 
     def testSring(self):
         self.assertEqual(str(self.oneDOne), "1d1")
         self.assertEqual(str(self.hundredDSix), "100d6")
 
     def testRange(self):
-        for _ in range(500):
+        for _ in range(1_000):
             self.assertGreaterEqual(self.fiveDFive.roll(), 5)
             self.assertLessEqual(self.fiveDFive.roll(), 25)
 

@@ -23,7 +23,7 @@ class TestDie(unittest.TestCase):
 
     def testDistro(self):
         roll_dict = {i: 0 for i in range(1, 101)}
-        for _ in range(1_000):
+        for _ in range(100_000):
             roll_dict[self.hundredSided.roll()] += 1
         for key in roll_dict:
             self.assertGreaterEqual(roll_dict[key], 1)
