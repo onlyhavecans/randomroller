@@ -9,13 +9,13 @@ class TestDice(unittest.TestCase):
         self.hundredDSix = Dice(100)
 
     def testGreaterThanZero(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             Dice(-1,6)
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             Dice(1,-6)
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             Dice(0,6)
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             Dice(1,0)
 
     def testIntArguments(self):

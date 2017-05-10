@@ -1,4 +1,4 @@
-import random
+import randomroller.random as random
 
 
 class Die:
@@ -10,7 +10,7 @@ class Die:
         """
         assert isinstance(sides, int)
         if sides <= 0:
-            raise TypeError("Die must have a number of sides greater than 0")
+            raise ValueError("Die must have a number of sides greater than 0")
         self.sides = sides
 
     def __str__(self):
@@ -24,5 +24,4 @@ class Die:
         Simulate a die roll, returning a random number
         :return: Int between 1 and the number of sides inclusive
         """
-        random.seed()
         return random.randint(1, self.sides)

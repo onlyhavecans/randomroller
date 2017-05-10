@@ -11,7 +11,7 @@ class Dice:
         """
         assert isinstance(count, int)
         if count <= 0:
-            raise TypeError("You cannot have less than one die")
+            raise ValueError("You cannot have less than one die")
         self.count = count
         self.die = Die(sides)
 

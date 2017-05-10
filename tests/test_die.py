@@ -15,12 +15,10 @@ class TestDie(unittest.TestCase):
     def testDefault6(self):
         self.assertEqual(self.sixSided.sides, 6)
 
-    def textZeroSides(self):
-        with self.assertRaises(TypeError):
+    def textSidesGreaterThanZero(self):
+        with self.assertRaises(ValueError):
             Die(0)
-
-    def textNegitiveSides(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             Die(-6)
 
     def testDistro(self):
