@@ -3,12 +3,14 @@ import random
 
 class Die:
 
-    def __init__(self, sides):
+    def __init__(self, sides=6):
         """
         A digital die construct
-        :param sides: Number of sides as an int
+        :param sides: Number of sides as an int. Defaults to 6, a standard die
         """
         assert isinstance(sides, int)
+        if sides <= 0:
+            raise TypeError("Die must have a number of sides greater than 0")
         self.sides = sides
 
     def __str__(self):

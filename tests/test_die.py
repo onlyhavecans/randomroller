@@ -6,11 +6,22 @@ class TestDie(unittest.TestCase):
 
     def setUp(self):
         self.oneSided = Die(1)
-        self.sixSided = Die(6)
+        self.sixSided = Die()
         self.hundredSided = Die(100)
 
     def testSingleSided(self):
         self.assertEqual(1, self.oneSided.roll())
+
+    def testDefault6(self):
+        self.assertEqual(self.sixSided.sides, 6)
+
+    def textZeroSides(self):
+        with self.assertRaises(TypeError):
+            Die(0)
+
+    def textNegitiveSides(self):
+        with self.assertRaises(TypeError):
+            Die(-6)
 
     def testDistro(self):
         roll_dict = {i: 0 for i in range(1, 101)}
