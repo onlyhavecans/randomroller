@@ -1,5 +1,5 @@
-from secrets import choice
+import secrets
 
 
 def randint(a, b):
-    return choice(range(a, b+1))
+    return secrets.choice(range(a, b+1))

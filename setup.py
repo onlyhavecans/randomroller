@@ -5,7 +5,7 @@ from distutils.core import setup
 setup(
     name='randomroller',
     version='1.0',
-    requires=['pyserial'],
+    requires=['pyserial', 'secrets'],
     description='An extra random dice roller',
     author='David Aronsohn',
     author_email='WagThatTail@Me.com',
