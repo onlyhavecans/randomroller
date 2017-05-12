@@ -1,4 +1,4 @@
-from randomroller.truerng import TrueRNG
+from .truerng import TrueRNG
 
 
 class Die:

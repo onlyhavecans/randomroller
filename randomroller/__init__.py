@@ -1,27 +1,23 @@
 #!/usr/bin/env python
 
 import argparse
-from randomroller.die import Die
-from randomroller.dice import Dice
-from randomroller.truerng import TrueRNG
+from .die import Die
+from .dice import Dice
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Simple but random dice roller")
     parser.add_argument("count", help="Number of dice", type=int)
-    parser.add_argument("sides", help="Number of sides on each die", type=int)
-    parser.add_argument("--rolls", help="Show the rolls instead of the total", action="store_true")
+    parser.add_argument("sides", help="Number of sides on each die", default=6, type=int)
     return parser.parse_args()
 
 
 def main():
     args = parse_arguments()
     dice = Dice(args.count, args.sides)
-    if args.rolls:
-        print(dice.rolls())
-    else:
-        print(dice.roll())
-
+    rolls = dice.rolls()
+    print("Your rolls are:", ", ".join(map(str, rolls)))
+    print("Your total is", sum(rolls))
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-from randomroller import Die
+from .die import Die
 
 
 class Dice:
