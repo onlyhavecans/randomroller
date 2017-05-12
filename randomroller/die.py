@@ -1,4 +1,4 @@
-import randomroller.random as random
+from randomroller.truerng import TrueRNG
 
 
 class Die:
@@ -12,6 +12,7 @@ class Die:
         if sides <= 0:
             raise ValueError("Die must have a number of sides greater than 0")
         self.sides = sides
+        self._rng = TrueRNG()
 
     def __str__(self):
         return 'd{}'.format(self.sides)
@@ -24,4 +25,4 @@ class Die:
         Simulate a die roll, returning a random number
         :return: Int between 1 and the number of sides inclusive
         """
-        return random.randint(1, self.sides)
+        return self._rng.choice(range(1, self.sides + 1))

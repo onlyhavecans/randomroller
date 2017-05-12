@@ -3,6 +3,7 @@
 import argparse
 from randomroller.die import Die
 from randomroller.dice import Dice
+from randomroller.truerng import TrueRNG
 
 
 def parse_arguments():

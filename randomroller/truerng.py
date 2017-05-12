@@ -7,6 +7,7 @@ class TrueRNG:
     def __init__(self, com_port=None):
         self._rng_com_port = None
         self.set_port(com_port)
+        self._pool = bytearray()
 
     def __repr__(self):
         return "TrueRNG({})".format(self._rng_com_port)
@@ -41,7 +42,7 @@ class TrueRNG:
             data = serial.read(byte_count)
         return data
 
-    def get_int(self, byte_count=1024):
+    def get_int(self, byte_count=64):
         """
         Return a very random int
         :return: int
@@ -49,6 +50,8 @@ class TrueRNG:
         return int.from_bytes(self.get_rng(byte_count), byteorder=sys.byteorder, signed=False)
 
     def choice(self, sequence):
+        if not sequence:
+            raise IndexError
         num = len(sequence)
         choice = self.get_int() % num
         return sequence[choice]

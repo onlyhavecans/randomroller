@@ -27,7 +27,7 @@ class TestDice(unittest.TestCase):
         self.assertEqual(str(self.hundredDSix), "100d6")
 
     def testRange(self):
-        for _ in range(1_000):
+        for _ in range(100):
             self.assertGreaterEqual(self.fiveDFive.roll(), 5)
             self.assertLessEqual(self.fiveDFive.roll(), 25)
 

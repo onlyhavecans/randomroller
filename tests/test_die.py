@@ -7,7 +7,7 @@ class TestDie(unittest.TestCase):
     def setUp(self):
         self.oneSided = Die(1)
         self.sixSided = Die()
-        self.hundredSided = Die(100)
+        self.tenSided = Die(10)
 
     def testSingleSided(self):
         self.assertEqual(1, self.oneSided.roll())
@@ -22,9 +22,9 @@ class TestDie(unittest.TestCase):
             Die(-6)
 
     def testDistro(self):
-        roll_dict = {i: 0 for i in range(1, 101)}
-        for _ in range(100_000):
-            roll_dict[self.hundredSided.roll()] += 1
+        roll_dict = {i: 0 for i in range(1, 11)}
+        for _ in range(500):
+            roll_dict[self.tenSided.roll()] += 1
         for key in roll_dict:
             self.assertGreaterEqual(roll_dict[key], 1)
 
@@ -35,7 +35,7 @@ class TestDie(unittest.TestCase):
     def testToString(self):
         self.assertEqual(str(self.oneSided), "d1")
         self.assertEqual(str(self.sixSided), "d6")
-        self.assertEqual(str(self.hundredSided), "d100")
+        self.assertEqual(str(self.tenSided), "d10")
 
 if __name__ == '__main__':
     unittest.main()
