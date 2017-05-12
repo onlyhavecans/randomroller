@@ -3,6 +3,9 @@
 A not very interesting die & dice rolling simulator.
 This is mostly so I can play with different of randoms
 
+## Requirements
+Currently requires a TrueRNG device plugged into the machine
+
 ## Library
 in randomroller there is Die (a single die), and Dice (a group of die all with the same side)
 
