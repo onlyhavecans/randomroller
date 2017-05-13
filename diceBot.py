@@ -53,8 +53,7 @@ async def roll(ctx, user_roll : str):
             author, d, ", ".join(map(str, rolls)), sum(rolls)
         ))
     except ValueError as e:
-        await client.send_message(channel, "Sorry {}, I don't understand !roll {}".format(author, user_roll))
-        await client.send_message(channel, "Error: {}".format(e))
+        await client.send_message(channel, "Sorry {}, I can't !roll {} because {}".format(author, user_roll, e))
 
 
 @client.command(pass_context=True, description='Deletes all rolls and bot messages')
