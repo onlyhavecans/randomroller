@@ -44,7 +44,7 @@ Examples:
 
 @client.command(pass_context=True, description=roll_description)
 @asyncio.coroutine
-async def roll(ctx, user_roll : str):
+async def roll(ctx, user_roll: str):
     author = ctx.message.author
     channel = ctx.message.channel
     mod = 0
@@ -81,7 +81,17 @@ async def purge(ctx):
     await client.send_message(channel, 'Deleted {} message(s)'.format(len(deleted)))
 
 
-def is_int(s : str):
+@client.command(pass_context=True)
+@asyncio.coroutine
+async def trump(ctx):
+    author = ctx.message.author
+    channel = ctx.message.channel
+    del_trump = lambda x: True if x.content.startswith("!trump") else False
+    deleted = await client.purge_from(channel, limit=10, check=del_trump)
+    await client.send_message(channel, "No trump allowed")
+
+
+def is_int(s: str):
     try:
         int(s)
         return True
