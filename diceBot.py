@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import discord
 import asyncio
 import logging
 from discord.ext import commands
@@ -84,10 +83,9 @@ async def purge(ctx):
 @client.command(pass_context=True)
 @asyncio.coroutine
 async def trump(ctx):
-    author = ctx.message.author
     channel = ctx.message.channel
     del_trump = lambda x: True if x.content.startswith("!trump") else False
-    deleted = await client.purge_from(channel, limit=10, check=del_trump)
+    _ = await client.purge_from(channel, limit=10, check=del_trump)
     await client.send_message(channel, "No trump allowed")
 
 
