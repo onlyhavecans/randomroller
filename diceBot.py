@@ -72,6 +72,21 @@ async def roll(ctx, user_roll: str):
         await client.send_message(channel, "Sorry {}, I can't !roll {} because {}".format(author, user_roll, e))
 
 
+@client.command(pass_context=True, description="Do a GURPS standard 3d6 roll")
+@asyncio.coroutine
+async def g(ctx):
+    author = ctx.message.author
+    channel = ctx.message.channel
+    try:
+        d = Dice(3, 6)
+        rolls = d.rolls()
+        await client.send_message(channel, "{} rolled {} and got {} for a total of {}".format(
+            author, d, ", ".join(map(str, rolls)), sum(rolls)
+        ))
+    except Exception as e:
+        await client.send_message(channel, "Sorry {}, I had am error: {}".format(author, e))
+
+
 @client.command(pass_context=True, description='Deletes all rolls and bot messages')
 @asyncio.coroutine
 async def purge(ctx):
