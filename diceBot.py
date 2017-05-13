@@ -29,13 +29,29 @@ async def on_ready():
     print('------')
 
 
-@client.command(pass_context=True, description="Rolls dice.\nExamples: 100 Roll 100d6\n3d10 Roll three d10")
+roll_description = """
+Rolls dice.
+### to roll ### d6
+Use #d# syntax to control sides
+use m# to add a modifier
+Examples:
+100 Roll 100d6
+3d10 Roll three d10
+3m2 roll 3d6 and add 2
+2d8m-5 roll 2 8 sided die and subtract 5
+"""
+
+
+@client.command(pass_context=True, description=roll_description)
 @asyncio.coroutine
 async def roll(ctx, user_roll : str):
     author = ctx.message.author
     channel = ctx.message.channel
+    mod = 0
     r = {"sides": 6, "die": 0}
 
+    if user_roll.find('m') != -1:
+        user_roll, mod = user_roll.split('m')
     if is_int(user_roll):
         r["die"] = int(user_roll)
     elif user_roll.find('d') != -1:
@@ -47,10 +63,11 @@ async def roll(ctx, user_roll : str):
             r[facet] = 100
 
     try:
+        mod = int(mod)
         d = Dice(r["die"], r["sides"])
         rolls = d.rolls()
         await client.send_message(channel, "{} rolled {} and got {} for a total of {}".format(
-            author, d, ", ".join(map(str, rolls)), sum(rolls)
+            author, d, ", ".join(map(str, rolls)), sum(rolls) + mod
         ))
     except ValueError as e:
         await client.send_message(channel, "Sorry {}, I can't !roll {} because {}".format(author, user_roll, e))
