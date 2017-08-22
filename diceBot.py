@@ -3,7 +3,7 @@
 import asyncio
 import logging
 from discord.ext import commands
-from randomroller import Dice
+from randomroller import dice
 
 description = """
 I'm a hardware RNG based die roller bot!
@@ -63,7 +63,7 @@ async def roll(ctx, user_roll: str):
 
     try:
         mod = int(mod)
-        d = Dice(r["die"], r["sides"])
+        d = dice.Dice(r["die"], r["sides"])
         rolls = d.rolls()
         await client.send_message(channel, "{} rolled {} and got {} for a total of {}".format(
             author, d, ", ".join(map(str, rolls)), sum(rolls) + mod

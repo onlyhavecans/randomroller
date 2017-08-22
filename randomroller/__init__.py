@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-from .die import Die
-from .dice import Dice
+from randomroller import dice
 
 
 def parse_arguments():
@@ -14,8 +13,8 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    dice = Dice(args.count, args.sides)
-    rolls = dice.rolls()
+    mydice = dice.Dice(args.count, args.sides)
+    rolls = mydice.rolls()
     print("Your rolls are:", ", ".join(map(str, rolls)))
     print("Your total is", sum(rolls))
 

@@ -12,7 +12,6 @@ setup(
     url='https://github.com/onlyhavecans/randomroller',
     packages=['randomroller'],
     entry_points={
-        'console_scripts': ['rr = randomroller:main']
+        'console_scripts': ['rr = randomroller:main'],
     },
-
 )
