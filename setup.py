@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='randomroller',
@@ -11,7 +11,10 @@ setup(
     author_email='WagThatTail@Me.com',
     url='https://github.com/onlyhavecans/randomroller',
     packages=['randomroller'],
+    include_package_data=True,
+    zip_safe=False,
+    platforms='any',
     entry_points={
-        'console_scripts': ['rr = randomroller:main'],
+        'console_scripts': ['rr = randomroller.cli:main'],
     },
 )
