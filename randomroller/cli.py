@@ -18,5 +18,6 @@ def main():
     print("Your rolls are:", ", ".join(map(str, rolls)))
     print("Your total is", sum(rolls))
 
+
 if __name__ == '__main__':
     main()

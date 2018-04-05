@@ -130,6 +130,7 @@ def load_credentials():
     with open('token', 'r') as f:
         return f.readline()
 
+
 if __name__ == '__main__':
     token = load_credentials()
     client.run(token)

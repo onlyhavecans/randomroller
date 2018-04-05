@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyserial = "*"
+"discord.py" = "==0.16.8"
+
+[dev-packages]
+neovim = "*"
+
+[requires]
+python_version = "3.6"
