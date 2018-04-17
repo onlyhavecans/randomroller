@@ -78,7 +78,7 @@ async def g(ctx):
     author = ctx.message.author
     channel = ctx.message.channel
     try:
-        d = Dice(3, 6)
+        d = dice.Dice(3, 6)
         rolls = d.rolls()
         await client.send_message(channel, "{} rolled {} and got {} for a total of {}".format(
             author, d, ", ".join(map(str, rolls)), sum(rolls)
