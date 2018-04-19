@@ -1,0 +1,2 @@
+include versioneer.py
+include randomroller/_version.py
