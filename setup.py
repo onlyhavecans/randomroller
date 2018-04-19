@@ -10,7 +10,7 @@ setup(
     requires=['pyserial'],
     description='An extra random dice roller',
     author='David Aronsohn',
-    author_email='WagThatTail@Me.com',
+    author_email='squirrel@wearing.black',
     url='https://github.com/onlyhavecans/randomroller',
     packages=['randomroller'],
     include_package_data=True,
