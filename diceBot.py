@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+My hardware roller discord bot
+"""
 
 import asyncio
 import logging
@@ -13,10 +16,10 @@ discord_logger = logging.getLogger('discord')
 discord_logger.setLevel(logging.DEBUG)
 log = logging.getLogger()
 log.setLevel(logging.DEBUG)
-#handler = logging.FileHandler(filename='rollBot.log', encoding='utf-8', mode='w')
-#log.addHandler(handler)
+handler = logging.FileHandler(filename='rollBot.log', encoding='utf-8', mode='w')
+log.addHandler(handler)
 
-prefix = '!'
+prefix = ','
 client = commands.Bot(command_prefix=prefix, description=description)
 
 
@@ -25,7 +28,7 @@ async def on_ready():
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
-    print('------')
+    print('------------------')
 
 
 roll_description = """
@@ -63,10 +66,10 @@ async def roll(ctx, user_roll: str):
 
     try:
         mod = int(mod)
-        d = dice.Dice(r["die"], r["sides"])
-        rolls = d.rolls()
+        user_dice = dice.Dice(r["die"], r["sides"])
+        rolls = user_dice.rolls()
         await client.send_message(channel, "{} rolled {} and got {} for a total of {}".format(
-            author, d, ", ".join(map(str, rolls)), sum(rolls) + mod
+            author, user_dice, ", ".join(map(str, rolls)), sum(rolls) + mod
         ))
     except ValueError as e:
         await client.send_message(channel, "Sorry {}, I can't !roll {} because {}".format(author, user_roll, e))
@@ -78,12 +81,27 @@ async def g(ctx):
     author = ctx.message.author
     channel = ctx.message.channel
     try:
-        d = dice.Dice(3, 6)
-        rolls = d.rolls()
+        gurps_dice = dice.Dice(3, 6)
+        rolls = gurps_dice.rolls()
         await client.send_message(channel, "{} rolled {} and got {} for a total of {}".format(
-            author, d, ", ".join(map(str, rolls)), sum(rolls)
+            author, gurps_dice, ", ".join(map(str, rolls)), sum(rolls)
         ))
-    except Exception as e:
+    except ValueError as e:
+        await client.send_message(channel, "Sorry {}, I had am error: {}".format(author, e))
+
+
+@client.command(pass_context=True, description="Do a d20 standard 1d20 roll")
+@asyncio.coroutine
+async def d(ctx):
+    author = ctx.message.author
+    channel = ctx.message.channel
+    try:
+        d20roll = dice.Dice(1, 20)
+        rolls = d20roll.rolls()
+        await client.send_message(channel, "{} rolled {} and got {}".format(
+            author, d20roll, ", ".join(map(str, rolls))
+        ))
+    except ValueError as e:
         await client.send_message(channel, "Sorry {}, I had am error: {}".format(author, e))
 
 
@@ -93,15 +111,6 @@ async def purge(ctx):
     channel = ctx.message.channel
     deleted = await client.purge_from(channel, limit=500, check=message_is_mine_or_a_roll)
     await client.send_message(channel, 'Deleted {} message(s)'.format(len(deleted)))
-
-
-@client.command(pass_context=True)
-@asyncio.coroutine
-async def trump(ctx):
-    channel = ctx.message.channel
-    del_trump = lambda x: True if x.content.startswith("!trump") else False
-    _ = await client.purge_from(channel, limit=10, check=del_trump)
-    await client.send_message(channel, "No trump allowed")
 
 
 def is_int(s: str):
@@ -122,8 +131,7 @@ def message_is_mine_or_a_roll(message):
         return True
     elif message.content.startswith(prefix):
         return True
-    else:
-        return False
+    return False
 
 
 def load_credentials():
