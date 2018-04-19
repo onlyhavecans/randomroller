@@ -9,6 +9,7 @@ pyserial = "*"
 [dev-packages]
 neovim = "*"
 versioneer = "*"
+twine = "*"
 
 [requires]
 python_version = "3.6"
