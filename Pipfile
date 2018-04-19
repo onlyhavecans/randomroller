@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 pyserial = "*"
-"discord.py" = "==0.16.8"
 
 [dev-packages]
 neovim = "*"
